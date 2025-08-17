@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app-service-manifests
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/debarbozar/app-service-manifests
+    targetRevision: app-service-manifests
+    path: manifests
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: app-service-manifests
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
